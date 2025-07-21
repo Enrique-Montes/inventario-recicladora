@@ -1,77 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background: #5fa473;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
 }
-h1 {
+
+header {
+  background: #007b5f;
+  color: white;
   text-align: center;
-  font-size: 2.5rem;
+  padding: 1em;
 }
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header h1 img {
+  vertical-align: middle;
+  margin: 0 0.3em;
+}
+
+header h3 {
+  margin: 0.3em 0 0 0;
+  font-weight: normal;
+}
+
+section {
+  padding: 1em;
+  max-width: 600px;
+  margin: auto;
+}
+
 h2 {
   text-align: center;
-  font-size: 2rem;
-  padding: 1rem;
-}
-h3 {
-  text-align: center;
-}
-.cerrar-sesion-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  padding-top: 60px;
+  color: #333;
 }
 
-#cerrarSesion {
-  background-color: #e74c3c;
-  color: #fff;
-  padding: 10px 30px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#cerrarSesion:hover {
-  background-color: #c0392b;
-  transform: scale(1.05);
-}
-section {
-  background: white;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 800px;
-  box-shadow: 0 2px 5px rgba(0,0,0,10);
-}
-input, select, button {
-  display: block;
-  margin: 30px auto;
-  padding: 10px;
-  width: 80%;
-}
+input,
+select,
 button {
-  background: #27ae60;
+  width: 100%;
+  padding: 0.8em;
+  margin: 0.5em 0;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #005f47;
   color: white;
   border: none;
   cursor: pointer;
 }
+
 button:hover {
-  background: #219150;
+  background-color: #810606;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 1em;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 0.6em;
   text-align: center;
+  font-size: 0.9em;
 }
 
 .oculto {
   display: none;
 }
+
+.cerrar-sesion-container {
+  text-align: center;
+  margin-top: 1em;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table, tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    margin-bottom: 1em;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5em;
+  }
+
+  td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 1em;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .admin-columna {
+    text-align: center;
+  }
+}
+
+/* diseño boton de cerrar sesion */
+.cerrar-sesion-container {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.cerrar-sesion-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+/* Hover para computadoras */
+.cerrar-sesion-container button:hover {
+  background-color: #c9302c;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+  .cerrar-sesion-container {
+    top: 60px;
+    right: 10px;
+  }
+
+  .cerrar-sesion-container button {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}
+

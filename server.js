@@ -10,9 +10,9 @@ app.use(express.static('public')); // sirve el frontend
 // Base de datos simulada
 let materiales = [];
 let usuarios = [
-  { usuario: "admin", clave: "12345", rol: "admin" },
-  { usuario: "luis", clave: "rooster", rol: "usuario" },
-  { usuario: "vero", clave: "verosiul", rol: "usuario" }
+  { usuario: "admin", clave: "Juan1017", rol: "admin" },
+  { usuario: "luis", clave: "Rooster", rol: "usuario" },
+  { usuario: "vero", clave: "Verosiul", rol: "usuario" }
 ];
 
 // Middleware de autenticación básica

@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inventario - Luveka PLastics</title>
+  <title>Inventario - Luveka Plastics</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    
     <h1>
-      <img src="reciclar.png"alt="Icono reciclaje" style="width:24px; height:24px; vertical-align:middle;">
-        LUVEKA PLASTICS
-      <img src="reciclar.png" alt="Icono reciclaje" style="width:24px; height:24px; vertical-align:middle;">
-      <h3>S. de R.L de C.V.</h3>
+      <img src="reciclar.png" alt="Icono reciclaje" style="width:24px; height:24px;">
+      LUVEKA PLASTICS
+      <img src="reciclar.png" alt="Icono reciclaje" style="width:24px; height:24px;">
     </h1>
-
+    <h3>S. de R.L de C.V.</h3>
   </header>
 
   <!-- 🔐 LOGIN -->
@@ -25,6 +23,10 @@
     <input type="password" id="clave" placeholder="Contraseña" />
     <button onclick="iniciarSesion()">Entrar</button>
   </section>
+
+   <div class="cerrar-sesion-container oculto" id="cerrarSesionContainer">
+      <button id="cerrarSesion" onclick="cerrarSesion()">🔒 Cerrar sesión</button>
+    </div>
 
   <!-- ✏️ FORMULARIO (solo para admin) -->
   <section id="formulario" class="oculto">
@@ -60,11 +62,12 @@
           <th class="admin-columna">Acciones</th>
         </tr>
       </thead>
-      <tbody id="materialList"></tbody>
+      <tbody id="materialList">
+        <!-- Las filas se generan dinámicamente -->
+      </tbody>
     </table>
   </section>
 
-  <!-- JS -->
   <script src="app.js"></script>
 </body>
 </html>
