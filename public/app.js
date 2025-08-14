@@ -61,6 +61,7 @@ function iniciarSesion() {
       if (rol === 'admin') {
         document.getElementById("formulario").classList.remove("oculto");
         document.querySelector(".admin-columna").style.display = "table-cell";
+        mostrarBotonOrdenSalida(); // 🔹 Mostrar botón de orden de salida
       } else {
         document.querySelector(".admin-columna").style.display = "none";
       }
@@ -93,6 +94,7 @@ function cargarMateriales() {
             <td>
               <button onclick="editar(${index})" title="Editar">✏️</button>
               <button onclick="eliminar(${index})" title="Eliminar">🗑️</button>
+              <button onclick="generarOrdenSalidaFila(${index})" title="Generar PDF">📦</button>
             </td>
           ` : ''}
         `;
@@ -113,21 +115,17 @@ function editar(id) {
       const mat = data[id];
       if (!mat) return alert("Material no encontrado");
 
-      // Guardamos el ID del material a editar
       editandoId = id;
 
-      // Rellenamos el formulario con los datos
       document.getElementById("nombre").value = mat.nombre;
       document.getElementById("cajas").value = mat.cajas;
       document.getElementById("tara").value = mat.tara;
       document.getElementById("neto").value = mat.neto;
       document.getElementById("estado").value = mat.estado;
 
-      // Cambiamos el botón a "Actualizar"
       document.querySelector("#materialForm button[type='submit']").textContent = "Actualizar";
     });
 }
-
 
 function eliminar(id) {
   fetch(`/api/materiales/${id}`, {
@@ -157,3 +155,50 @@ function cerrarSesion() {
   document.getElementById("usuario").value = '';
   document.getElementById("clave").value = '';
 }
+
+// 🔹 Nuevo: Mostrar botón para generar orden de salida
+function mostrarBotonOrdenSalida() {
+  document.getElementById("acciones-admin").innerHTML = `
+    <button onclick="generarOrdenSalida()">📦 Generar Orden de Salida</button>
+  `;
+}
+
+// 🔹 Nuevo: Función para generar la orden de salida
+function generarOrdenSalidaFila(index) {
+  // Obtener los datos del material de la tabla
+  fetch('/api/materiales', {
+    headers: {
+      'usuario': usuario,
+      'clave': clave
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const mat = data[index];
+    if (!mat) return alert("Material no encontrado");
+
+    // Llamamos a la función de generar PDF con esos datos
+    fetch("/api/orden-salida", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "usuario": usuario,
+        "clave": clave
+      },
+      body: JSON.stringify({ material: mat.nombre, cantidad: mat.cajas })
+    })
+    .then(res => res.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `orden_salida_${mat.nombre}_${Date.now()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch(err => alert(err.message));
+  });
+}
+

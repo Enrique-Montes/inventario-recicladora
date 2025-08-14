@@ -36,6 +36,27 @@ app.post('/api/materiales', autenticar, (req, res) => {
   res.json({ ok: true });
 });
 
+// Generar orden de salida (solo admin)
+app.post('/api/orden-salida', autenticar, (req, res) => {
+  if (req.usuario.rol !== 'admin') {
+    return res.status(403).json({ error: "Sin permisos para generar orden de salida" });
+  }
+
+  const nuevaOrden = {
+    id: Date.now(),
+    material: req.body.material,
+    cantidad: req.body.cantidad,
+    fecha: new Date(),
+    generadoPor: req.usuario.usuario // el nombre o usuario logueado
+  };
+
+  // Si usas un array en memoria
+  if (!global.ordenesSalida) global.ordenesSalida = [];
+  global.ordenesSalida.push(nuevaOrden);
+
+  res.json({ ok: true, orden: nuevaOrden });
+});
+
 // Eliminar material (solo admin)
 app.delete('/api/materiales/:id', autenticar, (req, res) => {
   if (req.usuario.rol !== 'admin') return res.status(403).json({ error: "Sin permisos" });

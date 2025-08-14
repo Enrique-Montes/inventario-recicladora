@@ -24,9 +24,9 @@
     <button onclick="iniciarSesion()">Entrar</button>
   </section>
 
-   <div class="cerrar-sesion-container oculto" id="cerrarSesionContainer">
-      <button id="cerrarSesion" onclick="cerrarSesion()">🔒 Cerrar sesión</button>
-    </div>
+  <div class="cerrar-sesion-container oculto" id="cerrarSesionContainer">
+    <button id="cerrarSesion" onclick="cerrarSesion()">🔒 Cerrar sesión</button>
+  </div>
 
   <!-- ✏️ FORMULARIO (solo para admin) -->
   <section id="formulario" class="oculto">
@@ -43,14 +43,15 @@
       </select>
       <button type="submit">Agregar</button>
     </form>
-    <div class="cerrar-sesion-container oculto" id="cerrarSesionContainer">
-      <button id="cerrarSesion" onclick="cerrarSesion()">🔒 Cerrar sesión</button>
-    </div>
   </section>
 
   <!-- 📦 TABLA DE INVENTARIO -->
   <section id="inventario" class="oculto">
     <h2>Lista de Materiales</h2>
+
+    <!-- 🔹 Botón solo para admin -->
+    <div id="acciones-admin"></div>
+
     <table>
       <thead>
         <tr>
